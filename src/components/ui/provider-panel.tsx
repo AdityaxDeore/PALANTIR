@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Satellite, X, ChevronUp, Circle } from "lucide-react";
 import {
@@ -90,15 +90,12 @@ export function ProviderDropdown({
   const dropdownRef = useRef<HTMLDivElement>(null);
   useDropdownDismiss(dropdownRef, open, onClose);
 
-  const [override, setOverride] = useState<ProviderName | "auto">("auto");
+  const [override, setOverride] = useState(() => getProviderOverride());
   const isAutoMode = override === "auto";
-  const [isDev, setIsDev] = useState(false);
-
-  useEffect(() => {
-    const hostname = window.location.hostname;
-    setIsDev(hostname === "localhost" || hostname === "127.0.0.1");
-    setOverride(getProviderOverride());
-  }, []);
+  const isDev =
+    typeof window !== "undefined" &&
+    (window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1");
 
   const handleSelect = useCallback(
     (provider: ProviderName | "auto") => {

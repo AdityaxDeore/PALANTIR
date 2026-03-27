@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --muted: 0 0% 12%;
+  --muted-foreground: 0 0% 60%;
+  --border: 0 0% 14%;
+  --ring: 0 0% 30%;
+  --radius: 0.625rem;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-ring: hsl(var(--ring));
+  --radius: var(--radius);
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "SF Mono", ui-monospace, monospace;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+html,
+body {
+  height: 100%;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Custom attribution component replaces built-in controls */
+.maplibregl-ctrl-attrib {
+  display: none !important;
+}
+
+.maplibregl-ctrl-logo {
+  display: none !important;
+}
+
+[data-map-theme="dark"] {
+  --ui-fg: 255 255 255;
+  --ui-bg: 0 0 0;
+}
+
+[data-map-theme="light"] {
+  --ui-fg: 0 0 0;
+  --ui-bg: 255 255 255;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── cmdk styles ─────────────────────────────────────────────────────── */
+
+.aeris-cmdk [cmdk-input] {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.aeris-cmdk [cmdk-group-heading] {
+  padding: 6px 12px 4px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgb(255 255 255 / 0.15);
+  user-select: none;
+}
+
+.aeris-cmdk [cmdk-list] {
+  overscroll-behavior: contain;
+}
+
+.aeris-cmdk [cmdk-group] + [cmdk-group] {
+  padding-top: 4px;
+}
+
+.aeris-cmdk [cmdk-empty] {
+  display: flex;
+}
+
+.aeris-cmdk .search-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+  outline: none;
+  user-select: none;
+}
+
+.aeris-cmdk .search-item[data-selected="true"] {
+  background: rgb(255 255 255 / 0.05);
+}
+
+.aeris-cmdk
+  [cmdk-item][data-selected="true"]
+  .group-data-\[selected\=true\]\/item\:opacity-100 {
+  opacity: 1;
+}
+
+.aeris-cmdk .search-item[data-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.aeris-cmdk .search-item:active:not([data-disabled="true"]) {
+  background: rgb(255 255 255 / 0.07);
+}

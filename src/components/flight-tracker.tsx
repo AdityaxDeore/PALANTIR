@@ -26,9 +26,8 @@ const ControlPanel = dynamic(() =>
 import { AltitudeLegend } from "@/components/ui/altitude-legend";
 import { CameraControls } from "@/components/ui/camera-controls";
 import { StatusBar } from "@/components/ui/status-bar";
-import { MapAttribution } from "@/components/ui/map-attribution";
 import { AtcPlayerBar } from "@/components/ui/atc-panel";
-import { Brand, GitHubBadge } from "@/components/flight-tracker-brand";
+import { Brand } from "@/components/flight-tracker-brand";
 import { SettingsProvider, useSettings } from "@/hooks/use-settings";
 import { useKeyboardShortcuts } from "@/hooks/use-keyboard-shortcuts";
 import { useFlights } from "@/hooks/use-flights";
@@ -175,7 +174,7 @@ function FlightTrackerInner() {
     syncFpvToUrl(fpvIcao24, activeCity);
   }, [fpvIcao24, activeCity]);
 
-  const { repoStars } = useFlightMonitors({
+  useFlightMonitors({
     pendingFpvRef,
     fpvIcao24,
     fpvFlight,
@@ -501,7 +500,6 @@ function FlightTrackerInner() {
 
         {!fpvIcao24 && (
           <div className="pointer-events-auto absolute right-3 top-3 flex items-center gap-1.5 sm:right-4 sm:top-4 sm:gap-2">
-            <GitHubBadge stars={repoStars} />
             <ControlPanel
               activeCity={activeCity}
               onSelectCity={setActiveCity}
@@ -552,12 +550,6 @@ function FlightTrackerInner() {
             </div>
             <div className="pointer-events-auto">
               <AltitudeLegend />
-            </div>
-            <div className="pointer-events-auto">
-              <MapAttribution
-                styleId={mapStyle.id}
-                showAirspace={settings.showAirspace}
-              />
             </div>
           </div>
         )}

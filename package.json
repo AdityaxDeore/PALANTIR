@@ -1,12 +1,14 @@
 {
-  "name": "aeris",
+  "name": "palantir",
   "version": "0.1.0",
   "description": "Real-time 3D flight tracking — altitude-aware, visually stunning.",
-  "author": "kewonit",
+  "author": "Aditya Deore",
   "license": "AGPL-3.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:clean": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Get-Process node -ErrorAction SilentlyContinue | Stop-Process -Force; Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue; npm ci --no-fund --no-audit; npm run dev\"",
+    "validate:runtime": "npm run lint && npm run build",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

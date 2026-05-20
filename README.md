@@ -1,29 +1,31 @@
-# Aeris
+# PALANTIR
 
-Real-time 3D flight tracking — altitude-aware, visually stunning.
+![Vessels on the sea body](/ships.png)
 
-Aeris renders live air traffic over the world's busiest airspaces on a premium dark-mode map. Flights are separated by altitude in true 3D: low altitudes glow cyan, high altitudes shift to gold. Select a city, and the camera glides to that airspace with spring-eased animation.
+![Aeroplane path 1](/p1.png) ![Aeroplane path 2](/p2.png) ![Aeroplane path 3](/p3.png)
 
-[Live Demo](https://aeris.edbn.me)
+The first image shows ships and vessels moving over a sea body, while the three following images highlight aeroplane paths rendered in a proper 3D view.
 
-<img width="2559" height="1380" alt="Screenshot 2026-02-15 112222" src="https://github.com/user-attachments/assets/9d1f50ed-be4e-4ef5-95ac-257e9129f8c8" />
+A futuristic airspace command center built for pilots, analysts and aviation teams.
 
-<img width="2555" height="1387" alt="image" src="https://github.com/user-attachments/assets/a1d2f673-dfdc-4c82-8ee2-7629d91ad94b" />
+PALANTIR is not just a flight tracker — it is a live, immersive map that turns raw ADS-B telemetry into instant situational awareness. Every aircraft is rendered with altitude-aware motion, crisp 3D models, and adaptive performance tuned for modern browsers.
 
-## Stack
+## What makes PALANTIR better
 
-| Layer     | Technology                                                       |
-| --------- | ---------------------------------------------------------------- |
-| Framework | Next.js 16 (App Router, Turbopack)                               |
-| Language  | TypeScript                                                       |
-| Styling   | Tailwind CSS v4                                                  |
-| Map       | MapLibre GL JS                                                   |
-| WebGL     | Deck.gl 9 (ScenegraphLayer, IconLayer, PathLayer, MapboxOverlay) |
-| Animation | Motion (Framer Motion)                                           |
-| Data      | Airplanes.live / adsb.lol / OpenSky (3-tier fallback)            |
-| Hosting   | Vercel                                                           |
+- Real-time air traffic in 3D across the world’s busiest airspaces
+- Altitude-based color and elevation mapping for instant threat and traffic separation
+- Smooth animated trails, frictionless camera transitions, and intuitive city targeting
+- Built to scale with a 3-tier fallback data pipeline: airplanes.live → adsb.lol → OpenSky
+- Minimal setup, no private API keys required, and a polished dark-mode interface
 
-## Getting Started
+## Why use PALANTIR
+
+- Flight ops teams get pro-grade visibility without the clutter
+- Developers get a modern Next.js stack with a ready-to-customize architecture
+- Designers get a refined experience built for motion, contrast, and responsiveness
+- Explorers get instant airspace context for every flight, airport, and route
+
+## Quick Start
 
 ```bash
 pnpm install
@@ -31,53 +33,32 @@ cp .env.example .env.local
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Then open [http://localhost:3000](http://localhost:3000).
 
-## Architecture
+## Core architecture
 
-```
-src/
-├── app/
-│   ├── globals.css            Tailwind config, theme vars
-│   ├── layout.tsx             Root layout (Inter font)
-│   ├── page.tsx               Entry — renders <FlightTracker />
-│   └── api/flights/route.ts   adsb.lol reverse proxy (CORS workaround + rate limit)
-├── components/
-│   ├── flight-tracker.tsx     Orchestrator — state, camera, layers, UI
-│   ├── map/
-│   │   ├── map.tsx            MapLibre GL wrapper with React context
-│   │   ├── flight-layers.tsx  Deck.gl overlay — icons, trails, shadows, animation
-│   │   ├── aircraft-model-mapping.ts  ADS-B category → 3D model key + bucketing
-│   │   └── aircraft-model-layers.ts   Builds per-model ScenegraphLayers
-│   └── ui/
-│       ├── altitude-legend.tsx
-│       ├── control-panel.tsx  Tabbed dialog — search, map style, settings
-│       ├── flight-card.tsx    Hover card with flight details
-│       ├── scroll-area.tsx    Custom scrollbar
-│       ├── slider.tsx         Orbit speed slider (Radix)
-│       └── status-bar.tsx     Live status indicator
-├── hooks/
-│   ├── use-flights.ts         Adaptive polling hook with credit-aware throttling
-│   ├── use-settings.tsx       Settings context with localStorage persistence
-│   └── use-trail-history.ts   Trail accumulation + Catmull-Rom smoothing
-└── lib/
-    ├── cities.ts              Curated aviation hub presets
-    ├── flight-api.ts          Barrel re-export for the 3-tier flight client
-    ├── flight-api-client.ts   airplanes.live → adsb.lol → OpenSky fallback chain
-    ├── flight-api-parsing.ts  readsb JSON → FlightState normalization
-    ├── flight-api-types.ts    Shared types for ADS-B providers
-    ├── flight-utils.ts        Altitude→color, unit conversions
-    ├── map-styles.ts          Map style definitions
-    ├── opensky.ts             OpenSky API client + types (Tier 3 fallback)
-    └── utils.ts               cn() utility
-```
+- `src/app/` — application shell, routes, metadata, and API proxy logic
+- `src/components/flight-tracker.tsx` — state orchestration, camera control, and layer composition
+- `src/components/map/` — MapLibre and Deck.gl integration for models, trails, airspace, and overlays
+- `src/components/ui/` — polished panels, search, controls, and navigation
+- `src/hooks/` — custom hooks for live flight state, settings persistence, keyboard shortcuts, and trail smoothing
+- `src/lib/` — reusable flight APIs, geometry helpers, airline/airport lookup, and ADS-B normalization
 
-## Design
+## Features
 
-- **Dark-first**: CARTO Dark Matter base map, theme-aware UI
-- **3D depth**: 55° pitch, altitude-based z-displacement via Deck.gl
+- 3D aircraft models with altitude-aware position and motion
+- Animated trails with spline smoothing and history stitching
+- Dark-first UI designed for desktop and mobile
+- Adaptive polling to preserve API credits and maintain freshness
+- Deep-linking by airport/city with instant camera focus
+- Local storage persistence for settings and theme preferences
 
-## Aircraft Models
+## License
+
+Copyright © 2026 Aditya Deore
+
+AGPL-3.0
+
 
 Aeris renders 14 distinct aircraft silhouettes based on ADS-B emitter category and ICAO type code:
 
@@ -116,5 +97,7 @@ Models are optimised GLB files (no Draco compression — avoids external WASM de
 No API keys are needed. Flight data comes from public ADS-B APIs with a built-in 3-tier fallback chain (airplanes.live → adsb.lol → OpenSky).
 
 ## License
+
+Copyright © 2026 Aditya Deore
 
 AGPL-3.0

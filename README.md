@@ -1,8 +1,8 @@
 # PALANTIR
 
-![Vessels on the sea body](/ships.png)
+![Vessels on the sea body](public/ships.png)
 
-![Aeroplane path 1](/p1.png) ![Aeroplane path 2](/p2.png) ![Aeroplane path 3](/p3.png)
+![Aeroplane path 1](public/p1.png) ![Aeroplane path 2](public/p2.png) ![Aeroplane path 3](public/p3.png)
 
 The first image shows ships and vessels moving over a sea body, while the three following images highlight aeroplane paths rendered in a proper 3D view.
 

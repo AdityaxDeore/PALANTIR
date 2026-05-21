@@ -602,14 +602,7 @@ export function AboutContent() {
             rel="noopener noreferrer"
             className="text-white/55 underline decoration-white/15 underline-offset-2 hover:text-white/70 transition-colors"
           >
-            kewonit
-          </a>
-          . Open to internships —{" "}
-          <a
-            href="mailto:kew@edbn.me"
-            className="text-white/55 underline decoration-white/15 underline-offset-2 hover:text-white/70 transition-colors"
-          >
-            kew@edbn.me
+            Aditya Deore
           </a>
         </p>
         <p className="text-[12px] leading-relaxed text-white/30">

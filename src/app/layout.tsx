@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     "live air traffic",
     "flight path tracker",
   ],
-  authors: [{ name: "kewonit", url: "https://github.com/kewonit" }],
-  creator: "kewonit",
-  publisher: "kewonit",
+  authors: [{ name: "Aditya Deore", url: "https://github.com/AdityaxDeore" }],
+  creator: "Aditya Deore",
+  publisher: "Aditya Deore",
   category: "travel",
   openGraph: {
     type: "website",

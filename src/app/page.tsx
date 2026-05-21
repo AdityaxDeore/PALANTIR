@@ -22,8 +22,8 @@ const jsonLd = [
     },
     author: {
       "@type": "Person",
-      name: "kewonit",
-      url: "https://github.com/kewonit",
+      name: "Aditya Deore",
+      url: "https://github.com/AdityaxDeore",
     },
     featureList: [
       "Real-time 3D flight tracking",
@@ -53,8 +53,8 @@ const jsonLd = [
     inLanguage: "en",
     publisher: {
       "@type": "Person",
-      name: "kewonit",
-      url: "https://github.com/kewonit",
+      name: "Aditya Deore",
+      url: "https://github.com/AdityaxDeore",
     },
     potentialAction: {
       "@type": "SearchAction",

@@ -47,14 +47,6 @@ export function AirspaceLayer({
 }: AirspaceLayerProps) {
   const { map, isLoaded } = useMap();
 
-  // Refs to let style.load callback read latest prop values
-  const visibleRef = useRef(visible);
-  visibleRef.current = visible;
-  const opacityRef = useRef(opacity);
-  opacityRef.current = opacity;
-  const hotspotsRef = useRef(showHotspots);
-  hotspotsRef.current = showHotspots;
-
   const mountedRef = useRef(true);
   useEffect(() => {
     mountedRef.current = true;
@@ -111,7 +103,7 @@ export function AirspaceLayer({
         source: SOURCE_ID,
         minzoom: AIRSPACE_MIN_ZOOM,
         paint: {
-          "raster-opacity": opacityRef.current,
+          "raster-opacity": opacity,
           "raster-contrast": AIRSPACE_CONTRAST,
           "raster-saturation": AIRSPACE_SATURATION,
           "raster-brightness-min": AIRSPACE_BRIGHTNESS_MIN,
@@ -145,12 +137,12 @@ export function AirspaceLayer({
           "raster-fade-duration": 200,
         },
         layout: {
-          visibility: hotspotsRef.current ? "visible" : "none",
+          visibility: showHotspots ? "visible" : "none",
         },
       },
       beforeId,
     );
-  }, [map, removeSources]);
+  }, [map, opacity, showHotspots]);
 
   // ── Add/remove sources based on visibility ─────────────────────────
   // When hidden → remove sources entirely to free tile ArrayBuffers.
@@ -160,7 +152,7 @@ export function AirspaceLayer({
 
     const onStyleLoad = () => {
       // After style swap, re-add only if currently visible
-      if (visibleRef.current) addSources();
+      if (visible) addSources();
     };
     map.on("style.load", onStyleLoad);
 

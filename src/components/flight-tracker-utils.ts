@@ -6,11 +6,11 @@ import { ICAO24_REGEX } from "@/lib/flight-api-types";
 export { DEFAULT_STYLE, ICAO24_REGEX };
 
 export const DEFAULT_CITY_ID = "sfo";
-export const STYLE_STORAGE_KEY = "aeris:mapStyle";
+export const STYLE_STORAGE_KEY = "palantir:mapStyle";
 export const DEFAULT_CITY =
   CITIES.find((c) => c.id === DEFAULT_CITY_ID) ?? CITIES[0];
-export const GITHUB_REPO_URL = "https://github.com/kewonit/aeris";
-export const GITHUB_REPO_API = "https://api.github.com/repos/kewonit/aeris";
+export const GITHUB_REPO_URL = "https://github.com/AdityaxDeore/PALANTIR";
+export const GITHUB_REPO_API = "https://api.github.com/repos/AdityaxDeore/PALANTIR";
 
 export const subscribeNoop = () => () => {};
 

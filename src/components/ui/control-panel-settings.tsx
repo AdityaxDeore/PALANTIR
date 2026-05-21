@@ -574,7 +574,7 @@ export function AboutContent() {
     <ScrollArea className="h-full">
       <div className="flex flex-col gap-5 p-5 pt-3">
         <h3 className="text-[20px] font-bold tracking-tight text-white/90">
-          Aeris
+          Palantir
         </h3>
 
         <div className="space-y-3 text-[13px] leading-relaxed text-white/40">
@@ -597,7 +597,7 @@ export function AboutContent() {
         <p className="text-[12px] leading-relaxed text-white/30">
           Built by{" "}
           <a
-            href="https://github.com/kewonit"
+            href="https://github.com/AdityaxDeore"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/55 underline decoration-white/15 underline-offset-2 hover:text-white/70 transition-colors"
@@ -615,7 +615,7 @@ export function AboutContent() {
         <p className="text-[12px] leading-relaxed text-white/30">
           Source is on{" "}
           <a
-            href="https://github.com/kewonit/aeris"
+            href="https://github.com/AdityaxDeore/PALANTIR"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/55 underline decoration-white/15 underline-offset-2 hover:text-white/70 transition-colors"
@@ -624,10 +624,10 @@ export function AboutContent() {
           </a>
           . Got a question or just wanna say hi?{" "}
           <a
-            href="mailto:aeris@edbn.me"
+            href="mailto:palantir@edbn.me"
             className="text-white/55 underline decoration-white/15 underline-offset-2 hover:text-white/70 transition-colors"
           >
-            aeris@edbn.me
+            palantir@edbn.me
           </a>
         </p>
       </div>

@@ -6,12 +6,12 @@ import { VALID_MOUNT_POINTS } from "@/lib/atc-feeds";
 
 // ── Constants ──────────────────────────────────────────────────────────
 
-const VOLUME_STORAGE_KEY = "aeris:atc:volume";
+const VOLUME_STORAGE_KEY = "palantir:atc:volume";
 const DEFAULT_VOLUME = 0.7;
 const RECONNECT_BASE_MS = 1000;
 const RECONNECT_MAX_MS = 30_000;
 const MAX_RECONNECT_ATTEMPTS = 5;
-const BROADCAST_CHANNEL_NAME = "aeris:atc-playback";
+const BROADCAST_CHANNEL_NAME = "palantir:atc-playback";
 
 // ── Volume persistence ─────────────────────────────────────────────────
 
@@ -90,6 +90,11 @@ export function useAtcStream(): UseAtcStreamReturn {
   const stalledTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const proxyAttemptedRef = useRef(false);
   const stoppedManuallyRef = useRef(false);
+  const cleanupAudioRef = useRef<() => void>(() => {});
+  const startPlaybackRef = useRef<
+    (targetFeed: AtcFeed, useProxy?: boolean, isReconnect?: boolean) => void
+  >(() => {});
+  const stopRef = useRef<() => void>(() => {});
 
   // Initialize volume from localStorage
   useEffect(() => {
@@ -115,7 +120,7 @@ export function useAtcStream(): UseAtcStreamReturn {
         msg.tabId !== tabIdRef.current &&
         audioRef.current
       ) {
-        cleanupAudio();
+        cleanupAudioRef.current();
         setFeed(null);
         feedRef.current = null;
         setStatus("idle");
@@ -154,6 +159,10 @@ export function useAtcStream(): UseAtcStreamReturn {
     proxyAttemptedRef.current = false;
   }, []);
 
+  useEffect(() => {
+    cleanupAudioRef.current = cleanupAudio;
+  }, [cleanupAudio]);
+
   // ── Media Session API ──────────────────────────────────────────────
 
   const updateMediaSession = useCallback(
@@ -169,17 +178,17 @@ export function useAtcStream(): UseAtcStreamReturn {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: activeFeed.name,
         artist: `${activeFeed.icao} · ${activeFeed.frequency}`,
-        album: "Aeris ATC",
+        album: "Palantir ATC",
       });
 
       navigator.mediaSession.playbackState = "playing";
 
       navigator.mediaSession.setActionHandler("pause", () => {
-        stop();
+        stopRef.current();
       });
 
       navigator.mediaSession.setActionHandler("stop", () => {
-        stop();
+        stopRef.current();
       });
 
       // No seek/track actions for live streams
@@ -189,7 +198,7 @@ export function useAtcStream(): UseAtcStreamReturn {
       navigator.mediaSession.setActionHandler("previoustrack", null);
       navigator.mediaSession.setActionHandler("nexttrack", null);
     },
-    [], // stop is stable due to useCallback
+    [],
   );
 
   // ── Reconnection logic ────────────────────────────────────────────
@@ -214,7 +223,7 @@ export function useAtcStream(): UseAtcStreamReturn {
       // Don't flash status — keep the error visible while we wait
       reconnectTimerRef.current = setTimeout(() => {
         if (feedRef.current?.id !== targetFeed.id) return;
-        startPlayback(targetFeed, useProxy, true);
+        startPlaybackRef.current(targetFeed, useProxy, true);
       }, delay);
     },
     [],
@@ -306,7 +315,7 @@ export function useAtcStream(): UseAtcStreamReturn {
         if (!useProxy && !proxyAttemptedRef.current) {
           proxyAttemptedRef.current = true;
           setError("Direct stream blocked. Trying proxy...");
-          startPlayback(targetFeed, true);
+          startPlaybackRef.current(targetFeed, true);
           return;
         }
 
@@ -352,6 +361,10 @@ export function useAtcStream(): UseAtcStreamReturn {
     [cleanupAudio, updateMediaSession, scheduleReconnect],
   );
 
+  useEffect(() => {
+    startPlaybackRef.current = startPlayback;
+  }, [startPlayback]);
+
   // ── Public API ────────────────────────────────────────────────────
 
   const play = useCallback(
@@ -385,6 +398,10 @@ export function useAtcStream(): UseAtcStreamReturn {
       // BroadcastChannel may be closed
     }
   }, [cleanupAudio, updateMediaSession]);
+
+  useEffect(() => {
+    stopRef.current = stop;
+  }, [stop]);
 
   const setVolume = useCallback((v: number) => {
     const clamped = Math.max(0, Math.min(1, v));

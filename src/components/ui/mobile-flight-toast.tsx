@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect, useCallback, useRef } from "react";
+import { useMemo, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import {
   ArrowUp,
@@ -125,30 +125,17 @@ export function MobileFlightToast({
     () => new Set([0]),
   );
 
-  // Reset carousel when photos change (new aircraft)
-  const photoKey = photos.map((p) => p.id).join(",");
-  useEffect(() => {
-    setActiveSlide(0);
-    setSlideLoadState({});
-    setMountedSlides(new Set([0]));
-    if (scrollRef.current) scrollRef.current.scrollLeft = 0;
-  }, [photoKey]);
-
-  // When the active slide changes, mount that slide's image
-  useEffect(() => {
-    setMountedSlides((prev) => {
-      if (prev.has(activeSlide)) return prev;
-      const next = new Set(prev);
-      next.add(activeSlide);
-      return next;
-    });
-  }, [activeSlide]);
-
   const handleScroll = useCallback(() => {
     const el = scrollRef.current;
     if (!el || el.clientWidth === 0) return;
     const idx = Math.round(el.scrollLeft / el.clientWidth);
     setActiveSlide(idx);
+    setMountedSlides((prev) => {
+      if (prev.has(idx)) return prev;
+      const next = new Set(prev);
+      next.add(idx);
+      return next;
+    });
   }, []);
 
   const handleSlideLoad = useCallback((index: number) => {

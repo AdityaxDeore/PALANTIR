@@ -2,13 +2,13 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-export const alt = "Aeris — Real-Time 3D Flight Tracking";
+export const alt = "Palantir — Real-Time 3D Flight Tracking";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function Image() {
   const imageData = await readFile(
-    join(process.cwd(), "public", "aeris-hero.png"),
+    join(process.cwd(), "public", "palantir-hero.png"),
   );
   const base64 = imageData.toString("base64");
   const heroSrc = `data:image/png;base64,${base64}`;

@@ -16,6 +16,7 @@ import { CameraController } from "@/components/map/camera-controller";
 import { AirportLayer } from "@/components/map/airport-layer";
 import { AirspaceLayer } from "@/components/map/airspace-layer";
 import { FlightLayers } from "@/components/map/flight-layers";
+import { GlobalAirportsLayer } from "@/components/map/global-airports-layer";
 const FlightCard = dynamic(() =>
   import("@/components/ui/flight-card").then((mod) => mod.FlightCard),
 );
@@ -455,6 +456,7 @@ function FlightTrackerInner() {
           onSelectAirport={setActiveCity}
           isDark={mapStyle.dark}
         />
+        <GlobalAirportsLayer isDark={mapStyle.dark} />
         <AirspaceLayer
           visible={settings.showAirspace}
           opacity={settings.airspaceOpacity}

@@ -34,7 +34,7 @@ const GLOBE_TRACE_SOURCES = [
 
 const OPENSKY_API = "https://opensky-network.org/api";
 
-const APP_UA = "Aeris/1.0 (flight-tracker; +https://github.com/kewonit/aeris)";
+const APP_UA = "Palantir/1.0 (flight-tracker; +https://github.com/AdityaxDeore/PALANTIR)";
 
 let lastRequestTime = 0;
 const RATE_MS = 800;

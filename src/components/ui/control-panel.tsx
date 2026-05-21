@@ -77,11 +77,11 @@ export function ControlPanel({
     function handleOpenShortcuts() {
       setOpenTab("shortcuts");
     }
-    window.addEventListener("aeris:open-search", handleOpenSearch);
-    window.addEventListener("aeris:open-shortcuts", handleOpenShortcuts);
+    window.addEventListener("palantir:open-search", handleOpenSearch);
+    window.addEventListener("palantir:open-shortcuts", handleOpenShortcuts);
     return () => {
-      window.removeEventListener("aeris:open-search", handleOpenSearch);
-      window.removeEventListener("aeris:open-shortcuts", handleOpenShortcuts);
+      window.removeEventListener("palantir:open-search", handleOpenSearch);
+      window.removeEventListener("palantir:open-shortcuts", handleOpenShortcuts);
     };
   }, []);
 
@@ -286,7 +286,7 @@ function PanelDialog({
 
             <div className="mt-auto pt-4 px-1 flex flex-col gap-3">
               <a
-                href="https://github.com/kewonit/aeris"
+                href="https://github.com/AdityaxDeore/PALANTIR"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub (opens in new tab)"

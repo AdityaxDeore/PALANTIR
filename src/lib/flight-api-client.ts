@@ -13,6 +13,7 @@ import {
   fetchFlightsByBbox,
   fetchFlightByIcao24 as openskyFetchByIcao24,
 } from "./opensky-flights";
+import { fetchGlobalFlights, validateGlobalFlights } from "./opensky-global";
 
 // ── Types ──────────────────────────────────────────────────────────────
 
@@ -272,7 +273,7 @@ async function fetchViaProxy(
   );
 }
 
-// ── Tier 3: OpenSky direct ─────────────────────────────────────────────
+// ── Tier 3: OpenSky direct (bounded) ───────────────────────────────────
 
 async function fetchFromOpenSkyPoint(
   lat: number,
@@ -283,7 +284,57 @@ async function fetchFromOpenSkyPoint(
   const [lamin, lamax, lomin, lomax] = bboxFromCenter(lon, lat, radiusDeg);
   const result = await fetchFlightsByBbox(lamin, lamax, lomin, lomax, signal);
   if (result.rateLimited) throw new Error("OpenSky rate limited (429)");
+  
+  console.log(
+    `[OpenSky Point] Fetched ${result.flights.length.toLocaleString()} flights`,
+    `within ${radiusDeg}° radius of [${lat.toFixed(2)}, ${lon.toFixed(2)}]`,
+  );
+  
   return result.flights;
+}
+
+// ── Global OpenSky (unbounded) ─────────────────────────────────────────
+
+/**
+ * Fetch ALL flights globally from OpenSky without bounding box restrictions.
+ * Uses authentication if credentials are provided in environment variables.
+ */
+export async function fetchGlobalFlightsDirect(
+  signal?: AbortSignal,
+): Promise<FlightApiFetchResult> {
+  console.log("[Global Flights] Fetching maximum global coverage from OpenSky...");
+  
+  try {
+    const result = await fetchGlobalFlights(signal);
+    
+    if (result.rateLimited) {
+      throw new Error("OpenSky rate limited (429)");
+    }
+    
+    // Validate flights with minimal filtering (only remove invalid coordinates)
+    const validated = validateGlobalFlights(result.flights);
+    
+    // Log distribution stats
+    const validFlights = validated.filter(
+      (f) => f.latitude != null && f.longitude != null,
+    );
+    
+    console.log(
+      `[Global Flights] ✓ Successfully retrieved ${validated.length.toLocaleString()} global flights`,
+    );
+    
+    return {
+      flights: validated,
+      rateLimited: false,
+      source: "opensky-global",
+    };
+  } catch (err) {
+    console.error(
+      "[Global Flights] Failed:",
+      err instanceof Error ? err.message : err,
+    );
+    throw err;
+  }
 }
 
 // ── Fallback Engine ────────────────────────────────────────────────────
@@ -383,6 +434,55 @@ export async function fetchFlightsByPoint(
     tiers.push({
       id: "opensky",
       fn: () => fetchFromOpenSkyPoint(cLat, cLon, radiusDeg, signal),
+    });
+  }
+
+  return runFallbackChain(tiers, signal);
+}
+
+/**
+ * Fetch all tracked flights globally.
+ * Uses the fallback chain: adsb.lol → OpenSky.
+ */
+export async function fetchAllFlightsGlobally(
+  signal?: AbortSignal,
+  options?: ParseOptions,
+): Promise<FlightApiFetchResult> {
+  const override = getProviderOverride();
+  const tiers: NamedTier[] = [];
+
+  // airplanes.live
+  if (override === "airplanes") {
+    tiers.push({
+      id: "airplanes",
+      fn: async () => {
+        const resp = await fetchDirectAirplanesLive("/all", signal);
+        return parseAircraftList(resp.ac, options);
+      },
+    });
+  }
+
+  // adsb.lol
+  if (override === "auto" || override === "adsb") {
+    tiers.push({
+      id: "adsb",
+      fn: async () => {
+        const resp = await fetchViaProxy("/all", signal);
+        return parseAircraftList(resp.ac, options);
+      },
+    });
+  }
+
+  // opensky
+  if (override === "auto" || override === "opensky") {
+    tiers.push({
+      id: "opensky",
+      fn: async () => {
+        const [lamin, lamax, lomin, lomax] = [-90, 90, -180, 180];
+        const result = await fetchFlightsByBbox(lamin, lamax, lomin, lomax, signal);
+        if (result.rateLimited) throw new Error("OpenSky rate limited (429)");
+        return result.flights;
+      },
     });
   }
 

@@ -184,10 +184,6 @@ export function useAircraftPhotos(
 
   useEffect(() => {
     if (!icao24) {
-      setPhotos([]);
-      setAircraft(null);
-      setLoading(false);
-      setError(false);
       return;
     }
 
@@ -300,6 +296,10 @@ export function useAircraftPhotos(
       controller.abort();
     };
   }, [icao24, registration]);
+
+  if (!icao24) {
+    return { photos: [], aircraft: null, loading: false, error: false };
+  }
 
   return { photos, aircraft, loading, error };
 }

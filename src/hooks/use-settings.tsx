@@ -83,7 +83,7 @@ const DEFAULT_SETTINGS: Settings = {
   showAtcPanel: false,
 };
 
-const STORAGE_KEY = "aeris:settings";
+const STORAGE_KEY = "palantir:settings";
 const STORAGE_VERSION = 1;
 const WRITE_DEBOUNCE_MS = 300;
 

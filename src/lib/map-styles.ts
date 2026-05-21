@@ -2,8 +2,8 @@ export type MapStyleSpec = string | Record<string, unknown>;
 
 export type TerrainProfile = "none" | "dark";
 
-export const TERRAIN_DEM_SOURCE_ID = "aeris-terrain-dem";
-export const TERRAIN_HILLSHADE_LAYER_ID = "aeris-terrain-hillshade";
+export const TERRAIN_DEM_SOURCE_ID = "palantir-terrain-dem";
+export const TERRAIN_HILLSHADE_LAYER_ID = "palantir-terrain-hillshade";
 
 /**
  * Single shared DEM source for both terrain mesh AND hillshade.

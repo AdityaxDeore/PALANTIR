@@ -56,7 +56,9 @@ export function StatusBar({
   useEffect(() => {
     if (atcToggle !== undefined && atcToggle !== prevToggleRef.current) {
       prevToggleRef.current = atcToggle;
-      setFeedDropdownOpen((p) => !p);
+      queueMicrotask(() => {
+        setFeedDropdownOpen((p) => !p);
+      });
     }
   }, [atcToggle]);
 

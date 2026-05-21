@@ -617,10 +617,10 @@ export function AboutContent() {
           </a>
           . Got a question or just wanna say hi?{" "}
           <a
-            href="mailto:palantir@edbn.me"
+            href="mailto:adityadeoreofficial@gmail.com"
             className="text-white/55 underline decoration-white/15 underline-offset-2 hover:text-white/70 transition-colors"
           >
-            palantir@edbn.me
+            adityadeoreofficial@gmail.com
           </a>
         </p>
       </div>

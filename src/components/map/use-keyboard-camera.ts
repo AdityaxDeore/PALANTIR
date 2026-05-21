@@ -139,12 +139,12 @@ export function useKeyboardCamera(
       if (state) state.held = false;
     };
 
-    window.addEventListener("aeris:camera-start", onStart);
-    window.addEventListener("aeris:camera-stop", onStop);
+    window.addEventListener("palantir:camera-start", onStart);
+    window.addEventListener("palantir:camera-stop", onStop);
 
     return () => {
-      window.removeEventListener("aeris:camera-start", onStart);
-      window.removeEventListener("aeris:camera-stop", onStop);
+      window.removeEventListener("palantir:camera-start", onStart);
+      window.removeEventListener("palantir:camera-stop", onStop);
       if (frameId != null) cancelAnimationFrame(frameId);
     };
   }, [map, isLoaded]);

@@ -28,7 +28,7 @@ import {
 
 // ── Recent searches (localStorage) ─────────────────────────────────────
 
-const RECENT_KEY = "aeris:recent-searches";
+const RECENT_KEY = "palantir:recent-searches";
 const RECENT_MAX = 4;
 const RECENT_EXPIRY_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
@@ -387,7 +387,7 @@ export function SearchContent({
 
   return (
     <Command
-      className="flex h-full flex-col aeris-cmdk"
+      className="flex h-full flex-col palantir-cmdk"
       filter={cmdkFilter}
       loop
       label="Search airports, flights, and cities"

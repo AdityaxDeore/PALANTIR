@@ -205,13 +205,13 @@ export function CameraController({
       });
     };
 
-    window.addEventListener("aeris:north-up", onNorthUp);
-    window.addEventListener("aeris:reset-view", onResetView);
+    window.addEventListener("palantir:north-up", onNorthUp);
+    window.addEventListener("palantir:reset-view", onResetView);
 
     return () => {
       if (northUpRafId != null) cancelAnimationFrame(northUpRafId);
-      window.removeEventListener("aeris:north-up", onNorthUp);
-      window.removeEventListener("aeris:reset-view", onResetView);
+      window.removeEventListener("palantir:north-up", onNorthUp);
+      window.removeEventListener("palantir:reset-view", onResetView);
     };
   }, [map, isLoaded, city]);
 

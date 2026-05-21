@@ -12,19 +12,19 @@ const inter = Inter({
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
-const title = "Aeris — Real-Time 3D Flight Tracking";
+const title = "PALANTIR — Real-Time 3D Flight Tracking";
 const description =
   "Track live flights in stunning 3D over the world's busiest airspaces. See real-time ADS-B data with altitude-aware rendering — low altitudes glow cyan, high altitudes shift to gold. Free and open source.";
-const siteUrl = "https://aeris.edbn.me";
+const siteUrl = "https://palantir.adityadeore.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: title,
-    template: "%s | Aeris",
+    template: "%s | PALANTIR",
   },
   description,
-  applicationName: "Aeris",
+  applicationName: "PALANTIR",
   keywords: [
     "flight tracker",
     "live flight tracker",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     "aviation tracker",
     "track flights live",
     "free flight tracker",
-    "aeris flight tracker",
+    "palantir flight tracker",
     "opensky network",
     "airplanes live",
     "adsb tracker",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "Aeris",
+    siteName: "PALANTIR",
     title,
     description,
   },
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     "mobile-web-app-capable": "yes",
     "apple-mobile-web-app-capable": "yes",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
-    "apple-mobile-web-app-title": "Aeris",
+    "apple-mobile-web-app-title": "PALANTIR",
   },
 };
 

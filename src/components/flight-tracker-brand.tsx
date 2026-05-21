@@ -13,7 +13,7 @@ export function Brand({ isDark }: { isDark: boolean }) {
         isDark ? "text-white/70" : "text-black/70"
       }`}
     >
-      aeris
+      palantir
     </span>
   );
 }

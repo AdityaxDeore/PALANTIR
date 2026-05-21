@@ -48,7 +48,7 @@ export const ALL_MODEL_KEYS: readonly AircraftModelKey[] = [
 // ── URL Resolution ─────────────────────────────────────────────────────
 
 const CLOUDINARY_CLOUD = "dfyrk32ua";
-const CLOUDINARY_FOLDER = "aeris/models/aircraft";
+const CLOUDINARY_FOLDER = "palantir/models/aircraft";
 
 // Per-model Cloudinary versions from upload response — ensures optimal
 // CDN cache (long-lived Cache-Control) and instant busting on re-upload.

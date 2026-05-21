@@ -788,7 +788,7 @@ export function FlightLayers({
         overlay.setProps({ layers });
       } catch (err) {
         if (process.env.NODE_ENV === "development") {
-          console.error("[aeris] FlightLayers render error:", err);
+          console.error("[palantir] FlightLayers render error:", err);
         }
       }
     }

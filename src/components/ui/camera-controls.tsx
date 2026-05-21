@@ -15,13 +15,13 @@ type CameraActionType = "zoom" | "pitch" | "bearing";
 
 function dispatchCameraStart(type: CameraActionType, direction: number) {
   window.dispatchEvent(
-    new CustomEvent("aeris:camera-start", { detail: { type, direction } }),
+    new CustomEvent("palantir:camera-start", { detail: { type, direction } }),
   );
 }
 
 function dispatchCameraStop(type: CameraActionType) {
   window.dispatchEvent(
-    new CustomEvent("aeris:camera-stop", { detail: { type } }),
+    new CustomEvent("palantir:camera-stop", { detail: { type } }),
   );
 }
 

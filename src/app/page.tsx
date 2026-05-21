@@ -1,13 +1,13 @@
 import { FlightTracker } from "@/components/flight-tracker";
 
-const siteUrl = "https://aeris.edbn.me";
+const siteUrl = "https://palantir.adityadeore.com";
 
 const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "@id": `${siteUrl}/#app`,
-    name: "Aeris",
+    name: "PALANTIR",
     url: siteUrl,
     description:
       "Track live flights in stunning 3D over the world's busiest airspaces. See real-time ADS-B data with altitude-aware rendering — low altitudes glow cyan, high altitudes shift to gold. Free and open source.",
@@ -46,7 +46,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${siteUrl}/#website`,
-    name: "Aeris",
+    name: "PALANTIR",
     url: siteUrl,
     description:
       "Real-time 3D flight tracking — altitude-aware, visually stunning, and completely free.",
@@ -72,7 +72,7 @@ const jsonLd = [
       {
         "@type": "ListItem",
         position: 1,
-        name: "Aeris — Real-Time 3D Flight Tracking",
+        name: "PALANTIR — Real-Time 3D Flight Tracking",
         item: siteUrl,
       },
     ],

@@ -60,7 +60,7 @@ Copyright © 2026 Aditya Deore
 AGPL-3.0
 
 
-Aeris renders 14 distinct aircraft silhouettes based on ADS-B emitter category and ICAO type code:
+PALANTIR renders 14 distinct aircraft silhouettes based on ADS-B emitter category and ICAO type code:
 
 | Model Key       | Represents                      | Assignment                                     |
 | --------------- | ------------------------------- | ---------------------------------------------- |

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Aeris uses 14 distinct 3D aircraft silhouettes to represent different aircraft types on the globe. Models are assigned based on ICAO type code (when available) or ADS-B emitter category.
+PALANTIR uses 14 distinct 3D aircraft silhouettes to represent different aircraft types on the globe. Models are assigned based on ICAO type code (when available) or ADS-B emitter category.
 
 Two iconic aircraft types — the **Airbus A380** and **Boeing 737** — have dedicated models for visual distinction. All other aircraft are mapped to generic silhouette categories.
 

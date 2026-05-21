@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/private/"],
       },
     ],
-    sitemap: "https://aeris.edbn.me/sitemap.xml",
+    sitemap: "https://palantir.adityadeore.com/sitemap.xml",
   };
 }

@@ -115,7 +115,7 @@ export function useOrbitCamera(
         }, IDLE_TIMEOUT_MS);
       }
     };
-    window.addEventListener("aeris:camera-stop", onCameraStop);
+    window.addEventListener("palantir:camera-stop", onCameraStop);
 
     idleTimerRef.current = setTimeout(() => {
       isInteractingRef.current = false;
@@ -127,7 +127,7 @@ export function useOrbitCamera(
       if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
       events.forEach((e) => container.removeEventListener(e, resetIdleTimer));
       map.off("movestart", onMoveStart);
-      window.removeEventListener("aeris:camera-stop", onCameraStop);
+      window.removeEventListener("palantir:camera-stop", onCameraStop);
     };
   }, [map, isLoaded, city, followFlight, fpvFlight, settings.autoOrbit]);
 }

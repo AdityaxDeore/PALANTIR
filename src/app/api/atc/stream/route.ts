@@ -69,7 +69,7 @@ export async function GET(request: NextRequest) {
     const upstream = await fetch(upstreamUrl, {
       signal: controller.signal,
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; Aeris/1.0)",
+        "User-Agent": "Mozilla/5.0 (compatible; PALANTIR/1.0)",
         Referer: "https://www.liveatc.net/",
         Accept: "audio/mpeg, audio/*, */*",
       },

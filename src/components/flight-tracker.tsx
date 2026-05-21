@@ -257,12 +257,12 @@ function FlightTrackerInner() {
   }, [fpvIcao24]);
 
   const handleNorthUp = useCallback(() => {
-    window.dispatchEvent(new CustomEvent("aeris:north-up"));
+    window.dispatchEvent(new CustomEvent("palantir:north-up"));
   }, []);
 
   const handleResetView = useCallback(() => {
     window.dispatchEvent(
-      new CustomEvent("aeris:reset-view", {
+      new CustomEvent("palantir:reset-view", {
         detail: { center: activeCity.coordinates },
       }),
     );
@@ -278,11 +278,11 @@ function FlightTrackerInner() {
   }, [settings.autoOrbit, update]);
 
   const handleOpenSearch = useCallback(() => {
-    window.dispatchEvent(new CustomEvent("aeris:open-search"));
+    window.dispatchEvent(new CustomEvent("palantir:open-search"));
   }, []);
 
   const handleToggleHelp = useCallback(() => {
-    window.dispatchEvent(new CustomEvent("aeris:open-shortcuts"));
+    window.dispatchEvent(new CustomEvent("palantir:open-shortcuts"));
   }, []);
 
   const handleToggleFpvKey = useCallback(() => {

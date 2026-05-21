@@ -77,7 +77,7 @@ export default async function Image() {
             display: "flex",
           }}
         >
-          Aeris
+          PALANTIR
         </div>
 
         {/* Tagline */}
@@ -140,7 +140,7 @@ export default async function Image() {
           border: "1px solid rgba(255,255,255,0.2)",
         }}
       >
-        aeris.edbn.me
+        palantir.adityadeore.com
       </div>
     </div>,
     { ...size },

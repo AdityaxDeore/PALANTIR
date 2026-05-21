@@ -1,5 +1,7 @@
 # PALANTIR
 
+[Open the live site](https://palantir-7dem.vercel.app/?city=SFO)
+
 ![Vessels on the sea body](public/ships.png)
 
 ![Aeroplane path 1](public/p1.png) ![Aeroplane path 2](public/p2.png) ![Aeroplane path 3](public/p3.png)
